@@ -1,0 +1,16 @@
+name: PlayerTracker
+version: 1.0-SNAPSHOT
+main: me.vicen621.playertracker.Main
+api-version: 1.16
+authors: [ Vicen621 ]
+description: PlayerTracker Plugin
+
+commands:
+  hunter:
+    description: Set the hunters
+  man:
+    description: Set the dams
+  tl:
+    description: broadcast your cordinates to your team
+  nl:
+    description: when you're on the nether, do this command to get the coordinates of the dam
