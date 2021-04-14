@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="PlayerTracker:jar">
+    <output-path>$USER_HOME$/Desktop/PluginsIntellIJ</output-path>
+    <root id="archive" name="PlayerTracker.jar">
+      <element id="module-output" name="PlayerTracker" />
+    </root>
+  </artifact>
+</component>

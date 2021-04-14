@@ -1,18 +1,20 @@
 package me.vicen621.playertracker;
 
-import java.util.ArrayList;
-import java.util.UUID;
-
 import me.vicen621.playertracker.Commands.TrackerCommand;
 import me.vicen621.playertracker.Listeners.Chat;
 import me.vicen621.playertracker.Listeners.TrackerListener;
 import me.vicen621.playertracker.Utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Difficulty;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.*;
+
+import java.util.ArrayList;
+import java.util.UUID;
 
 public final class Main extends JavaPlugin {
 
@@ -29,9 +31,13 @@ public final class Main extends JavaPlugin {
         Tracker();
         RegisterTeams();
         RegisterScoreboards();
+
+        for (World w : Bukkit.getWorlds()){
+            w.setDifficulty(Difficulty.HARD);
+        }
     }
 
-    private void RegisterTeams(){
+    private void RegisterTeams() {
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         assert manager != null;
         Scoreboard board = manager.getMainScoreboard();
@@ -47,7 +53,7 @@ public final class Main extends JavaPlugin {
         }
     }
 
-    private void RegisterScoreboards(){
+    private void RegisterScoreboards() {
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         assert manager != null;
         Scoreboard board = manager.getMainScoreboard();

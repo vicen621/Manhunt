@@ -8,9 +8,9 @@ description: PlayerTracker Plugin
 commands:
   hunter:
     description: Set the hunters
-  man:
-    description: Set the dams
+  pray:
+    description: Set the prey
   tl:
     description: broadcast your cordinates to your team
   nl:
-    description: when you're on the nether, do this command to get the coordinates of the dam
+    description: when you're on the nether, do this command to get the coordinates of the prey

@@ -19,7 +19,7 @@ public class TrackerCommand implements CommandExecutor {
     public TrackerCommand(Main plugin) {
         this.plugin = plugin;
         plugin.getCommand("hunter").setExecutor(this);
-        plugin.getCommand("man").setExecutor(this);
+        plugin.getCommand("pray").setExecutor(this);
         plugin.getCommand("tl").setExecutor(this);
         plugin.getCommand("nl").setExecutor(this);
     }
@@ -35,16 +35,17 @@ public class TrackerCommand implements CommandExecutor {
             } else {
                 Player p = Bukkit.getPlayer(args[0]);
 
-                if (p == null){
+                if (p == null) {
                     sender.sendMessage(Utils.chat(Main.prefix + "&cEl jugador debe estar online!"));
                     return true;
                 }
 
-                if (Main.Hunter.contains(p.getUniqueId())){
+                if (Main.Hunter.contains(p.getUniqueId())) {
                     board.getTeam("hunters").removeEntry(p.getName());
                     p.setPlayerListName(Utils.chat("&f" + p.getName()));
                     Main.Hunter.remove(p.getUniqueId());
                     Bukkit.broadcastMessage(Utils.chat(Main.prefix + p.getName() + " ya no es un &ccazador!"));
+                    p.getInventory().remove(Material.COMPASS);
                     return true;
                 }
 
@@ -55,19 +56,19 @@ public class TrackerCommand implements CommandExecutor {
                 Bukkit.broadcastMessage(Utils.chat(Main.prefix + p.getName() + " ahora es un &ccazador!"));
                 p.getInventory().addItem(new ItemStack(Material.COMPASS));
             }
-        } else if (sender instanceof Player && cmd.getName().equalsIgnoreCase("man") && sender.isOp()) {
+        } else if (sender instanceof Player && cmd.getName().equalsIgnoreCase("pray") && sender.isOp()) {
             if (args.length != 1) {
-                sender.sendMessage(Utils.chat(Main.prefix + "&cUsage: /man <player>"));
+                sender.sendMessage(Utils.chat(Main.prefix + "&cUsage: /pray <player>"));
                 return true;
             } else {
                 Player p = Bukkit.getPlayer(args[0]);
 
-                if (p == null){
+                if (p == null) {
                     sender.sendMessage(Utils.chat(Main.prefix + "&cEl jugador debe estar online!"));
                     return true;
                 }
 
-                if (Main.Man.contains(p.getUniqueId())){
+                if (Main.Man.contains(p.getUniqueId())) {
                     board.getTeam("presas").removeEntry(p.getName());
                     p.setPlayerListName(Utils.chat("&f" + p.getName()));
                     Main.Man.remove(p.getUniqueId());
@@ -75,7 +76,7 @@ public class TrackerCommand implements CommandExecutor {
                     return true;
                 }
 
-                if (Main.Man.size() == 1){
+                if (Main.Man.size() == 1) {
                     sender.sendMessage(Utils.chat(Main.prefix + "Ya hay una presa puesta!"));
                     return true;
                 }
@@ -87,7 +88,7 @@ public class TrackerCommand implements CommandExecutor {
                 Bukkit.broadcastMessage(Utils.chat(Main.prefix + p.getName() + " ahora es la &cPresa!"));
                 p.getInventory().remove(Material.COMPASS);
             }
-        }else if (sender instanceof Player && cmd.getName().equalsIgnoreCase("tl")){
+        } else if (sender instanceof Player && cmd.getName().equalsIgnoreCase("tl")) {
             Player player = (Player) sender;
             Team team = Utils.getTeam(player);
 
@@ -109,33 +110,33 @@ public class TrackerCommand implements CommandExecutor {
 
             Utils.broadcastToTeam(team, Utils.chat(prefix + format));
             return true;
-        }else if (sender instanceof Player && cmd.getName().equalsIgnoreCase("nl")){
+        } else if (sender instanceof Player && cmd.getName().equalsIgnoreCase("nl")) {
             Player s = (Player) sender;
 
-            if (Main.Man.isEmpty()){
+            if (Main.Man.isEmpty()) {
                 sender.sendMessage(Utils.chat(Main.prefix + "Nadie es la presa!"));
                 return true;
             }
 
             Player p = Bukkit.getPlayer(Main.Man.get(0));
 
-            if (p == null){
+            if (p == null) {
                 sender.sendMessage(Utils.chat(Main.prefix + "&cLa presa esta offline!"));
                 return true;
             }
 
-            if (!Main.Hunter.contains(s.getUniqueId())){
+            if (!Main.Hunter.contains(s.getUniqueId())) {
                 sender.sendMessage(Utils.chat(Main.prefix + "&cSolo los cazadores pueden usar este comando"));
                 return true;
             }
-            if (!s.getWorld().getName().equalsIgnoreCase("world_nether")){
+            if (!s.getWorld().getName().equalsIgnoreCase("world_nether")) {
                 s.sendMessage(Utils.chat(Main.prefix + "&cEste comando solo puede ser usado en el nether!"));
                 return true;
             }
 
             if (s.getWorld().getName().equalsIgnoreCase("world_nether")) {
                 s.sendMessage(Utils.chat(Main.prefix + "La presa esta en: &6X&7: " + p.getLocation().getBlockX() + " &6Y&7:" + p.getLocation().getBlockY() + " &6Z&7: " + p.getLocation().getBlockZ()));
-            }else{
+            } else {
                 s.sendMessage(Utils.chat(Main.prefix + "La presa no esta en el nether!"));
             }
         }

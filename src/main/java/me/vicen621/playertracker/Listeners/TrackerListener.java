@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -31,7 +32,7 @@ public class TrackerListener implements Listener {
     }
 
     @EventHandler
-    public void onDimensionChange(PlayerChangedWorldEvent e){
+    public void onDimensionChange(PlayerChangedWorldEvent e) {
         Player p = e.getPlayer();
         if (Main.Man.contains(p.getUniqueId())) {
             loc = e.getPlayer().getLocation();
@@ -39,10 +40,16 @@ public class TrackerListener implements Listener {
     }
 
     @EventHandler
-    public void onDeath(PlayerDeathEvent e){
-        Player p = e.getEntity();
-        for (ItemStack drops : e.getDrops()){
-            if (drops.getType() == Material.COMPASS){
+    public void asd(PlayerDropItemEvent e){
+        if (e.getItemDrop().getItemStack().getType() == Material.COMPASS && Main.Hunter.contains(e.getPlayer().getUniqueId())){
+            e.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onDeath(PlayerDeathEvent e) {
+        for (ItemStack drops : e.getDrops()) {
+            if (drops.getType() == Material.COMPASS) {
                 e.getDrops().remove(drops);
                 break;
             }
