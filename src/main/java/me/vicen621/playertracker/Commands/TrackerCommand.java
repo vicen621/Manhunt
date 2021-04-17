@@ -12,6 +12,11 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
 
+/*
+ * Copyright (c) 2021. Vicen621
+ * All rights reserved.
+ */
+
 public class TrackerCommand implements CommandExecutor {
 
     private final Main plugin;

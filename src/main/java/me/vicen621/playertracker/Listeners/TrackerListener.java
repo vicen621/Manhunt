@@ -13,6 +13,11 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 
+/*
+ * Copyright (c) 2021. Vicen621
+ * All rights reserved.
+ */
+
 public class TrackerListener implements Listener {
     public Main plugin;
     public static Location loc = null;

@@ -16,6 +16,11 @@ import org.bukkit.scoreboard.*;
 import java.util.ArrayList;
 import java.util.UUID;
 
+/*
+ * Copyright (c) 2021. Vicen621
+ * All rights reserved.
+ */
+
 public final class Main extends JavaPlugin {
 
     public static ArrayList<UUID> Hunter = new ArrayList<>();

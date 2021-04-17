@@ -9,6 +9,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.scoreboard.Team;
 
+/*
+ * Copyright (c) 2021. Vicen621
+ * All rights reserved.
+ */
+
 public class Chat implements Listener {
 
     private final Main plugin;

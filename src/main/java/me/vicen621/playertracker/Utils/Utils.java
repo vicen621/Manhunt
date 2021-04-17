@@ -12,6 +12,11 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/*
+ * Copyright (c) 2021. Vicen621
+ * All rights reserved.
+ */
+
 public class Utils {
     private static final Scoreboard BOARD = Bukkit.getScoreboardManager().getMainScoreboard();
     private static final Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
