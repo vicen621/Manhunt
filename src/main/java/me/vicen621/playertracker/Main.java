@@ -1,8 +1,7 @@
 package me.vicen621.playertracker;
 
 import me.vicen621.playertracker.Commands.TrackerCommand;
-import me.vicen621.playertracker.Listeners.Chat;
-import me.vicen621.playertracker.Listeners.TrackerListener;
+import me.vicen621.playertracker.Listeners.*;
 import me.vicen621.playertracker.Utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -37,7 +36,7 @@ public final class Main extends JavaPlugin {
         RegisterTeams();
         RegisterScoreboards();
 
-        for (World w : Bukkit.getWorlds()){
+        for (World w : Bukkit.getWorlds()) {
             w.setDifficulty(Difficulty.HARD);
         }
     }
@@ -85,13 +84,11 @@ public final class Main extends JavaPlugin {
                         assert man != null;
 
                         if (hunter.getWorld() == man.getWorld()) {
-                            if (hunter.getWorld().getName().equalsIgnoreCase("world")) {
-                                hunter.setCompassTarget(man.getLocation());
-                            }
+                            hunter.setCompassTarget(man.getLocation());
                         } else {
-                            if (hunter.getWorld().getName().equalsIgnoreCase("world") && man.getWorld().getName().equalsIgnoreCase("world_nether")) {
+                            if (hunter.getWorld().getEnvironment() == World.Environment.NORMAL && man.getWorld().getEnvironment() == World.Environment.NETHER) {
                                 hunter.setCompassTarget(TrackerListener.loc);
-                            } else if (hunter.getWorld().getName().equalsIgnoreCase("world_nether") && man.getWorld().getName().equalsIgnoreCase("world")) {
+                            } else if (hunter.getWorld().getEnvironment() == World.Environment.NETHER && man.getWorld().getEnvironment() == World.Environment.NORMAL) {
                                 hunter.setCompassTarget(TrackerListener.loc);
                             }
                         }

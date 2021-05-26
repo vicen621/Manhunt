@@ -3,11 +3,15 @@ package me.vicen621.playertracker.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
 
+import java.util.Collection;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -75,5 +79,11 @@ public class Utils {
 
     public static String setColor(OfflinePlayer p) {
         return hasTeam(p) ? getColorTeam(p) : "&7";
+    }
+
+
+    public static boolean canBreak(ItemStack item, Block bl, Entity entity) {
+        Collection<ItemStack> result = bl.getDrops(item, entity);
+        return !result.isEmpty();
     }
 }

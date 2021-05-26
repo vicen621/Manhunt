@@ -12,6 +12,8 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
 
+import static org.bukkit.World.Environment.NETHER;
+
 /*
  * Copyright (c) 2021. Vicen621
  * All rights reserved.
@@ -134,12 +136,12 @@ public class TrackerCommand implements CommandExecutor {
                 sender.sendMessage(Utils.chat(Main.prefix + "&cSolo los cazadores pueden usar este comando"));
                 return true;
             }
-            if (!s.getWorld().getName().equalsIgnoreCase("world_nether")) {
+            if (s.getWorld().getEnvironment() != NETHER) {
                 s.sendMessage(Utils.chat(Main.prefix + "&cEste comando solo puede ser usado en el nether!"));
                 return true;
             }
 
-            if (s.getWorld().getName().equalsIgnoreCase("world_nether")) {
+            if (p.getWorld().getEnvironment() == NETHER) {
                 s.sendMessage(Utils.chat(Main.prefix + "La presa esta en: &6X&7: " + p.getLocation().getBlockX() + " &6Y&7:" + p.getLocation().getBlockY() + " &6Z&7: " + p.getLocation().getBlockZ()));
             } else {
                 s.sendMessage(Utils.chat(Main.prefix + "La presa no esta en el nether!"));

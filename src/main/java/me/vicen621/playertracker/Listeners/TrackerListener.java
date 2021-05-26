@@ -45,8 +45,8 @@ public class TrackerListener implements Listener {
     }
 
     @EventHandler
-    public void asd(PlayerDropItemEvent e){
-        if (e.getItemDrop().getItemStack().getType() == Material.COMPASS && Main.Hunter.contains(e.getPlayer().getUniqueId())){
+    public void asd(PlayerDropItemEvent e) {
+        if (e.getItemDrop().getItemStack().getType() == Material.COMPASS && Main.Hunter.contains(e.getPlayer().getUniqueId())) {
             e.setCancelled(true);
         }
     }
