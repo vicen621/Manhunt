@@ -26,7 +26,7 @@ public class Utils {
     private static final Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
 
     public static String chat(String s) {
-        if (Bukkit.getVersion().contains("1.16")) {
+        if (Bukkit.getVersion().contains("1.16") || Bukkit.getVersion().contains("1.17")) {
             s = s.replace("&#", "#").replace("&k", "");
             Matcher match = pattern.matcher(s);
             while (match.find()) {
