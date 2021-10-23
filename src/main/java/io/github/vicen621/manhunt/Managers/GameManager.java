@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2021. Vicen621.
+ * All rights reserved.
+ */
+
 package io.github.vicen621.manhunt.Managers;
 
 import io.github.vicen621.manhunt.Utils.ItemBuilder;
@@ -40,7 +45,7 @@ public class GameManager {
         RunnerInstance newHunter = new RunnerInstance(p);
         hunterInfo.add(newHunter);
         p.setPlayerListName(StringUtils.chat("&#0c768b" + p.getName()));
-        Bukkit.broadcastMessage(StringUtils.chat(StringUtils.getPrefix() + p.getName() + " ahora es un &ccazador!"));
+        Bukkit.broadcastMessage(StringUtils.chat(StringUtils.getPrefix() + p.getName() + " is now a &#0c768bhunter!"));
         p.getInventory().addItem(new ItemBuilder(Material.COMPASS).name("&6&lTracker").enchant(Enchantment.LUCK).flags(ItemFlag.HIDE_ENCHANTS).setCustomModelData(1).build());
     }
 
@@ -51,7 +56,7 @@ public class GameManager {
         hunterInfo.remove(getHunter(p));
 
         p.setPlayerListName(StringUtils.chat("&f" + p.getName()));
-        Bukkit.broadcastMessage(StringUtils.chat(StringUtils.getPrefix() + p.getName() + " ya no es un &ccazador!"));
+        Bukkit.broadcastMessage(StringUtils.chat(StringUtils.getPrefix() + p.getName() + " is no longer a &#0c768bhunter!"));
         p.getInventory().remove(Material.COMPASS);
     }
 
@@ -74,7 +79,7 @@ public class GameManager {
 
         runners.add(p.getUniqueId());
         p.setPlayerListName(StringUtils.chat("&#e70096" + p.getName()));
-        Bukkit.broadcastMessage(StringUtils.chat(StringUtils.getPrefix() + p.getName() + " ahora es una &cPresa!"));
+        Bukkit.broadcastMessage(StringUtils.chat(StringUtils.getPrefix() + p.getName() + " is now a &#e70096runner!"));
         p.getInventory().remove(Material.COMPASS);
     }
 
@@ -82,7 +87,7 @@ public class GameManager {
         if (!runners.contains(p.getUniqueId())) return;
 
         runners.remove(p.getUniqueId());
-        Bukkit.broadcastMessage(StringUtils.chat(StringUtils.getPrefix() + p.getName() + " ya no es la &cPresa!"));
+        Bukkit.broadcastMessage(StringUtils.chat(StringUtils.getPrefix() + p.getName() + " is no longer a &#e70096runner!"));
         p.setPlayerListName(StringUtils.chat("&f" + p.getName()));
     }
 

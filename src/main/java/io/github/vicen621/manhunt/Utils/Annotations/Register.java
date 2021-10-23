@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2021. Vicen621.
+ * All rights reserved.
+ */
+
 package io.github.vicen621.manhunt.Utils.Annotations;
 
 import java.lang.annotation.ElementType;
