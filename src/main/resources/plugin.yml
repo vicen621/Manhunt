@@ -17,6 +17,8 @@ commands:
     description: Send your current coordinates to your team
   start:
     description: Starts the game!
+  examine:
+    description: Allows spectators to view player inventories
 
 permissions:
   manhunt.tl:

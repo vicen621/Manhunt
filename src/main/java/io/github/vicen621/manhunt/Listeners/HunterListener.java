@@ -12,6 +12,7 @@ import io.github.vicen621.manhunt.Utils.ItemBuilder;
 import io.github.vicen621.manhunt.Utils.StringUtils;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -62,12 +63,15 @@ public record HunterListener(Main plugin) implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
+        p.setPlayerListHeaderFooter("", "");
         if (Main.getManager().isHunter(p))
             p.setPlayerListName(StringUtils.chat("&#0c768b" + p.getName()));
         else if (Main.getManager().isRunner(p))
             p.setPlayerListName(StringUtils.chat("&#e70096" + p.getName()));
-        else if (Main.getManager().isStarted())
-            p.setPlayerListName(StringUtils.chat("&7" + p.getName()));
+        else if (Main.getManager().isStarted()) {
+            p.setPlayerListName(StringUtils.chat("&8" + p.getName()));
+            p.setGameMode(GameMode.SPECTATOR);
+        }
     }
 
     @EventHandler
@@ -88,10 +92,16 @@ public record HunterListener(Main plugin) implements Listener {
 
     @EventHandler
     public void onDeath(PlayerDeathEvent e) {
-        for (ItemStack drops : e.getDrops()) {
-            if (drops.getType() == Material.COMPASS && Main.getManager().isTracker(drops)) {
-                e.getDrops().remove(drops);
-                break;
+        if (Main.getManager().isRunner(e.getEntity())) {
+            Main.getManager().removeRunner(e.getEntity());
+            e.getEntity().setPlayerListName(StringUtils.chat("&8" + e.getEntity().getName()));
+            e.getEntity().setGameMode(GameMode.SPECTATOR);
+        } else {
+            for (ItemStack drops : e.getDrops()) {
+                if (drops.getType() == Material.COMPASS && Main.getManager().isTracker(drops)) {
+                    e.getDrops().remove(drops);
+                    break;
+                }
             }
         }
     }

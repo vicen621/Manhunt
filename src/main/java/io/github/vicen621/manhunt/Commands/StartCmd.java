@@ -9,13 +9,13 @@ import io.github.vicen621.manhunt.Main;
 import io.github.vicen621.manhunt.Managers.GameRunnable;
 import io.github.vicen621.manhunt.Utils.Annotations.Register;
 import io.github.vicen621.manhunt.Utils.StringUtils;
-import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -53,7 +53,9 @@ public record StartCmd(Main plugin) implements CommandExecutor {
             if (p == null) continue;
             p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 6*20, 200));
             p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 6*20, 150));
-            p.teleport(p.getWorld().getSpawnLocation().add(10, 0, 0));
+            Location loc = p.getWorld().getSpawnLocation().add(3, 0, 0);
+            loc.setY(p.getWorld().getHighestBlockYAt(loc.getBlockX(), loc.getBlockZ()));
+            p.teleport(loc);
         }
 
         new BukkitRunnable() {
@@ -63,6 +65,10 @@ public record StartCmd(Main plugin) implements CommandExecutor {
                 switch (i--) {
                     case 5 -> {
                         for (Player p : Bukkit.getOnlinePlayers()) {
+                            if (!Main.getManager().isHunter(p) && !Main.getManager().isRunner(p)) {
+                                p.setPlayerListName(StringUtils.chat("&8" + p.getName()));
+                                p.setGameMode(GameMode.SPECTATOR);
+                            }
                             p.sendTitle(StringUtils.chat("&45"), "");
                             p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_XYLOPHONE, 1, 2);
                         }
@@ -95,8 +101,7 @@ public record StartCmd(Main plugin) implements CommandExecutor {
                         for (Player p : Bukkit.getOnlinePlayers()) {
                             p.sendTitle(StringUtils.chat("&bGo!"), "");
                             p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_XYLOPHONE, 1, 2);
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 9 * 20, 255, false, false));
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION, 9 * 20, 255, false, false));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION, 20, 255, false, false));
                         }
 
                         new GameRunnable().runTaskTimer(plugin, 0L, 10L);
