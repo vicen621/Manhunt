@@ -25,7 +25,6 @@ public class RegisterExecutor {
         for (Class<?> cls : classes) {
             if (cls.isAnnotationPresent(Register.class)) {
                 Register register = cls.getAnnotation(Register.class);
-                System.out.println(cls.getSimpleName());
 
                 register(cls, register.name());
             }

@@ -22,21 +22,14 @@ import java.util.UUID;
 public class GameManager {
 
     @Getter
-    private final ArrayList<RunnerInstance> hunterInfo;
+    private final ArrayList<RunnerInstance> hunterInfo = new ArrayList<>();
     @Getter
-    private final ArrayList<UUID> hunters;
+    private final ArrayList<UUID> hunters = new ArrayList<>();
     @Getter
-    private final ArrayList<UUID> runners;
+    private final ArrayList<UUID> runners = new ArrayList<>();
     @Getter
     @Setter
-    private boolean started;
-
-    public GameManager() {
-        hunterInfo = new ArrayList<>();
-        hunters = new ArrayList<>();
-        runners = new ArrayList<>();
-        started = false;
-    }
+    private boolean started = false;
 
     public void addHunter(Player p) {
         if (hunters.contains(p.getUniqueId())) return;
@@ -66,7 +59,7 @@ public class GameManager {
 
     public RunnerInstance getHunter(Player p) {
         for (RunnerInstance hunter : hunterInfo)
-            if (hunter.getHunter() == p.getUniqueId()) return hunter;
+            if (hunter.getHunter().equals(p.getUniqueId())) return hunter;
         return null;
     }
 
@@ -97,7 +90,7 @@ public class GameManager {
 
     public RunnerInstance getRunner(Player p) {
         for (RunnerInstance runner : hunterInfo)
-            if (runner.getRunner() == p.getUniqueId()) return runner;
+            if (runner.getRunner().equals(p.getUniqueId())) return runner;
         return null;
     }
 

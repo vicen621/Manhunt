@@ -56,7 +56,7 @@ public record HunterListener(Main plugin) implements Listener {
 
             Player runner = Main.getManager().getRunner(runnerID);
             p.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                    TextComponent.fromLegacyText(StringUtils.chat("§6Now tracking: " + "§4§l" + runner.getDisplayName())));
+                    TextComponent.fromLegacyText(StringUtils.chat(runner == null ? "&c&lThere are no players to track!" : "§6Now tracking: " + "§4§l" + runner.getName())));
         }
     }
 
