@@ -37,6 +37,7 @@ public class GameRunnable extends BukkitRunnable {
             Player p = Bukkit.getPlayer(uuid);
             if (p == null || p.isDead()) return;
             RunnerInstance hunter = manager.getHunter(p);
+            if (hunter == null) return;
             Player runner = manager.getRunner(hunter.getRunnerID());
 
             if (runner == null || runner.isDead()) return;
