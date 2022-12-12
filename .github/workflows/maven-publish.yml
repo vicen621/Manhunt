@@ -21,8 +21,31 @@ jobs:
         java-version: '17'
         distribution: 'adopt'
     - run: mvn --batch-mode --update-snapshots verify
-    - run: mkdir staging && cp target/*.jar staging
-    - uses: actions/upload-artifact@v3
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
       with:
-       name: Test
-       path: staging
+        path: "**/target"
+  
+  release:
+    needs: [build]
+    runs-on: ubuntu-18.04
+    
+    steps:
+      - name: Set up JDK 17
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
+
+      - name: Set up Node.js v16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16.x"
+
+      - uses: actions/checkout@v3
+
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_URL: "https://api.github.com/"
+        run: npx --legacy-peer-deps -p @semantic-release/changelog -p @semantic-release/git -p @semantic-release/exec -p gradle-semantic-release-plugin -p semantic-release semantic-release
+
